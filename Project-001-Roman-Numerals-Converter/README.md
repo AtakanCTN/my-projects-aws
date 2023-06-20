@@ -144,3 +144,5 @@ aws ec2 delete-security-group --group-name roman_numbers_sec_grp_okt
 # aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-903004f8
 
 # https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+
+aws ec2 describe-instances --query 'Reservations[].Instances[].{PubIP:PublicIpAddress, InsID:InstanceId, InsName:Tags[?Key==`Name`].Value | [0], InsState:State.Name, SG:Security.Groups[].GroupName}' --output table
